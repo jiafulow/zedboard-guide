@@ -1,5 +1,7 @@
 # zedboard-guide
 
+## Overview
+
 ZedBoard specs:
 - Zynq-7000 AP SoC XC7Z020-CLG484
 - Dual-core ARM Cortex A9
@@ -37,10 +39,63 @@ ZedBoard images:
 - Images from http://zedboard.org/product/zedboard
 
 Host OS:
-- Ubuntu Linux 14.04
+- Ubuntu Linux 14.04.3 LTS (GNU/Linux 3.16.0-50-generic x86_64)
 
 Xilinx applications:
-- Vivado Design Suite 2015.2
+- Vivado Design Suite (including SDK) 2015.2
   - See http://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/2015-2.html
 - PetaLinux 2015.2
   - See http://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/2015-2.html
+
+## Installation
+
+- Install Xilinx applications:
+
+```
+# Vivado
+tar -zxvf Xilinx_Vivado_SDK_Lin_2015.2_0626_1.tar.gz
+cd Xilinx_Vivado_SDK_Lin_2015.2_0626_1
+sudo ./xsetup
+
+# PetaLinux
+sudo ./petalinux-v2015.2.1-final-installer.run /opt/PetaLinux
+```
+
+- Install necessary packages from official Ubuntu repository:
+
+```
+sudo apt-get install gawk ncurses-dev zlib1g-dev libssl-dev
+# The following are 32-bit libraries
+sudo apt-get install lib32z1 lib32ncurses5 lib32bz2-1.0 lib32stdc++6
+```
+
+- Install cable drivers:
+
+```
+cd /opt/Xilinx/Vivado/2015.2/data/xicom/cable_drivers/lin64/install_script/install_drivers
+sudo ./install_drivers 
+```
+- Change /bin/sh to bash
+
+```
+sudo dpkg-reconfigure dash
+# Select <No>
+```
+
+- Install serial terminal console:
+
+```
+sudo apt-get install gtkterm
+sudo addgroup `whoami` dialout 
+sudo gtkterm
+# Go to Configuration -> Port, select the following:
+#   Port     : /dev/ttyACM0
+#   Baud Rate: 115200
+```
+
+
+## Startup
+
+- Get the licenses by launching Vivado. Select Help ->  Manage License...
+  - The licenses should appear in the directory ~/.Xilinx
+
