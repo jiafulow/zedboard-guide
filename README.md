@@ -2,9 +2,10 @@
 
 ## Overview
 
-ZedBoard specs:
+ZedBoard specs (Rev D):
 - Zynq-7000 AP SoC XC7Z020-CLG484
 - Dual-core ARM Cortex A9
+  - ARMv7-A architecture, r3p0 revision
 - Memory:
   - 512 MB DDR3
   - 256 Mb Quad-SPI Flash
@@ -13,11 +14,14 @@ ZedBoard specs:
 - 10/100/1000 Ethernet
 - USB OTG 2.0 and USB-UART
 - PS & PL I/O expansion (FMC, Pmod™, XADC)
+  - GPIO with four 32-bit banks, of which up to 54 bits can be used with the PS I/O and up to 64 bits connected to the PL
+  - Up to 54 flexible multiplexed I/O (MIO) for peripheral pin assignments
 - Multiple displays (1080p HDMI, 8-bit VGA, 128 x 32 OLED)
 - I2S Audio CODEC
 - See http://www.digilentinc.com/zedboard
 
-ZedBoard images:
+ZedBoard images 
+(from http://zedboard.org/product/zedboard)
 <table>
 <tr>
 <th>Front</th>
@@ -36,7 +40,14 @@ ZedBoard images:
 <td><img src="/images/block_diagram_0_0.jpg" width="240px" alt="Block Diagram"/></td>
 </tr>
 </table>
-- Images from http://zedboard.org/product/zedboard
+
+Zynq-7000 AP SoC overview 
+(from http://www.xilinx.com/support/documentation/user_guides/ug585-Zynq-7000-TRM.pdf)
+<table>
+<tr>
+<td><img src="/images/ZynqBlockDiagram.png" width="480px" alt="Zynq-7000 AP SoC overview"/></td>
+</tr>
+</table>
 
 Host OS:
 - Ubuntu Linux 14.04.3 LTS (GNU/Linux 3.16.0-50-generic x86_64)
@@ -98,4 +109,11 @@ sudo gtkterm
 
 - Get the licenses by launching Vivado. Select Help ->  Manage License...
   - The licenses should appear in the directory ~/.Xilinx
+- Setup the environments:
+
+```
+source /opt/Xilinx/Vivado/2015.2/settings64.sh
+source /opt/Xilinx/SDK/2015.2/settings64.sh
+source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
+```
 
