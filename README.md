@@ -3,12 +3,14 @@
 ## Overview
 
 ZedBoard specs (Rev D):
-- Zynq-7000 AP SoC XC7Z020-CLG484
+- Xilinx Zynq-7000 AP SoC XC7Z020-CLG484
 - Dual-core ARM Cortex A9
   - ARMv7-A architecture, r3p0 revision
 - Memory:
-  - 512 MB DDR3
-  - 256 Mb Quad-SPI Flash
+  - 512 MB DDR3 SD RAM
+  - 256 Mb Quad-SPI flash memory
+  - Static memory controller
+  - 256 KB RAM in the on-chip memory
   - 4 GB SD card
 - Onboard USB-JTAG Programming
 - 10/100/1000 Ethernet
@@ -43,6 +45,7 @@ ZedBoard images
 
 Zynq-7000 AP SoC overview 
 (from http://www.xilinx.com/support/documentation/user_guides/ug585-Zynq-7000-TRM.pdf)
+
 <table>
 <tr>
 <td><img src="/images/ZynqBlockDiagram.png" width="480px" alt="Zynq-7000 AP SoC overview"/></td>
@@ -51,6 +54,7 @@ Zynq-7000 AP SoC overview
 
 Host OS:
 - Ubuntu Linux 14.04.3 LTS (GNU/Linux 3.16.0-50-generic x86_64)
+  - See http://releases.ubuntu.com/14.04/ 
 
 Xilinx applications:
 - Vivado Design Suite (including SDK) 2015.2
@@ -116,4 +120,15 @@ source /opt/Xilinx/Vivado/2015.2/settings64.sh
 source /opt/Xilinx/SDK/2015.2/settings64.sh
 source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
 ```
+
+## Useful info
+
+- Zynq-7000 memory map
+(from http://www.xilinx.com/support/documentation/data_sheets/ds190-Zynq-7000-Overview.pdf)
+
+<table>
+<tr>
+<td><img src="/images/ZynqMemoryMap.png" width="480px" alt="Zynq-7000 memory map"/></td>
+</tr>
+</table>
 
