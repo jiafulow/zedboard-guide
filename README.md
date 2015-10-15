@@ -83,7 +83,7 @@ sudo ./petalinux-v2015.2.1-final-installer.run /opt/PetaLinux
 - Install necessary packages from official Ubuntu repository:
 
 ```
-sudo apt-get install gawk ncurses-dev zlib1g-dev libssl-dev
+sudo apt-get install gawk bison flex tftpd ncurses-dev zlib1g-dev libssl-dev
 # The following are 32-bit libraries
 sudo apt-get install lib32z1 lib32ncurses5 lib32bz2-1.0 lib32stdc++6
 ```
@@ -129,6 +129,9 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
 
 ## Useful info
 
+- Zynq-7000 Technical Reference Manual (UG585)  
+  http://www.xilinx.com/support/documentation/user_guides/ug585-Zynq-7000-TRM.pdf
+
 - Zynq-7000 memory map  
   (from http://www.xilinx.com/support/documentation/data_sheets/ds190-Zynq-7000-Overview.pdf)
 
@@ -138,13 +141,11 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
 </tr>
 </table>
 
+- ZedBoard Out Of Box (OOB) SD card image and source can be downloaded from Digilent website: http://www.digilentinc.com/Data/Products/ZEDBOARD/ZedBoard_OOB_Design.zip
+
 ## Tutorials
 1. ZedBoard Getting Started Guide  
    http://zedboard.org/sites/default/files/documentations/GS-AES-Z7EV-7Z020-G-V7.pdf
-
-1. Vivado Design Suite Tutorial: Embedded Processor Hardware Design  
-   http://www.xilinx.com/support/documentation/sw_manuals/xilinx2015_2/ug940-vivado-tutorial-embedded-design.pdf
-   - Remember to download the tutorial design files
 
 1. Vivado Zynq SpeedWay Workshops  
    http://zedboard.org/support/trainings-and-videos
@@ -152,6 +153,17 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
      http://zedboard.org/node/2563/
    - Developing Zynq-7000 All Programmable SoC Software  
      http://zedboard.org/node/2540/
+   - PetaLinux for the Zynq-7000 All Programmable SoC  
+     http://zedboard.org/course/petalinux-zynq%C2%AE-7000-all-programmable-soc
 
 1. Zynq Design From Scratch blog by Sven Andersson  
    http://svenand.blogdrive.com/
+
+1. Vivado Design Suite Tutorial: Embedded Processor Hardware Design (UG940)  
+   http://www.xilinx.com/support/documentation/sw_manuals/xilinx2015_2/ug940-vivado-tutorial-embedded-design.pdf
+   - Remember to download the tutorial design files
+
+1. Xilinx University Program Workshops  
+   http://www.xilinx.com/support/university/workshops.html
+   - Embedded System Design Flow on Zynq  
+     http://www.xilinx.com/support/university/vivado/vivado-workshops/Vivado-embedded-design-flow-zynq.html
