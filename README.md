@@ -22,9 +22,6 @@
   - I2S Audio CODEC
   - See http://www.digilentinc.com/zedboard
 
-- ZedBoard schematics
-  - See http://zedboard.org/sites/default/files/documentations/ZedBoard_RevD.2_Schematic_130516.pdf
-  
 - ZedBoard images  
   (from http://zedboard.org/product/zedboard)
 
@@ -141,7 +138,11 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
 </tr>
 </table>
 
+- ZedBoard schematics  
+  http://zedboard.org/sites/default/files/documentations/ZedBoard_RevD.2_Schematic_130516.pdf
+  
 - ZedBoard Out Of Box (OOB) SD card image and source can be downloaded from Digilent website: http://www.digilentinc.com/Data/Products/ZEDBOARD/ZedBoard_OOB_Design.zip
+   - A backup copy of the OOB SD card can be found in the 'bootimage' directory
 
 ## Tutorials
 1. ZedBoard Getting Started Guide  
