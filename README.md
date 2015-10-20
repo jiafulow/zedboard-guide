@@ -109,6 +109,36 @@ sudo gtkterm
 #   Baud Rate: 115200
 ```
 
+- Setup TFTP server
+  - Create a text file /etc/xinetd.d/tftp with the following content:
+
+  ```
+  service tftp
+  {
+  protocol        = udp
+  port            = 69
+  socket_type     = dgram
+  wait            = yes
+  user            = nobody
+  server          = /usr/sbin/in.tftpd
+  server_args     = /tftpboot
+  disable         = no
+  }
+  ```
+
+  - Create a directory /tftpboot
+
+  ```
+  sudo mkdir /tftpboot
+  sudo chmod -R 777 /tftpboot
+  sudo chown -R nobody /tftpboot
+  ```
+
+  - Restart the xinetd service
+
+  ```
+  sudo service xinetd restart
+  ```
 
 ## Startup
 
@@ -148,7 +178,7 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
 1. ZedBoard Getting Started Guide  
    http://zedboard.org/sites/default/files/documentations/GS-AES-Z7EV-7Z020-G-V7.pdf
 
-1. Vivado Zynq SpeedWay Workshops  
+1. Avnet Zynq SpeedWay Workshops  
    http://zedboard.org/support/trainings-and-videos
    - Developing Zynq-7000 All Programmable SoC Hardware  
      http://zedboard.org/node/2563/
@@ -168,3 +198,8 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
    http://www.xilinx.com/support/university/workshops.html
    - Embedded System Design Flow on Zynq  
      http://www.xilinx.com/support/university/vivado/vivado-workshops/Vivado-embedded-design-flow-zynq.html
+
+## Known Issues
+
+- Release Notes and Known Issues for PetaLinux 2013.04 and later (AR# 55776)
+  - http://www.xilinx.com/support/answers/55776.html
