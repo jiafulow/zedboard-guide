@@ -140,6 +140,29 @@ sudo gtkterm
   sudo service xinetd restart
   ```
 
+- Setup DHCP server
+  - Set a network connection profile with
+
+   ```
+   ip address: 192.168.1.1
+   netmask   : 255.255.255.0
+   gateway   : 192.168.1.100
+   ```
+
+  - Install DHCP server
+
+   ```
+   sudo apt-get install isc-dhcp-server
+   ```
+
+  - Edit /etc/dhcp/dhcpd.conf and /etc/default/isc-dhcp-server according to https://help.ubuntu.com/lts/serverguide/dhcp.html
+
+  - Restart
+
+    ```
+    sudo service isc-dhcp-server restart
+    ```
+
 ## Startup
 
 - Get a license from http://www.xilinx.com/getlicense
