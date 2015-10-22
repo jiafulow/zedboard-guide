@@ -197,6 +197,13 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
 - ZedBoard Out Of Box (OOB) SD card image and source can be downloaded from Digilent website: http://www.digilentinc.com/Data/Products/ZEDBOARD/ZedBoard_OOB_Design.zip
    - A backup copy of the OOB SD card can be found in the 'bootimage' directory
 
+- PetaLinux Tools
+  - See http://www.xilinx.com/tools/petalinux-sdk.htm
+  - Note that PetaLinux v2015.2.1 is based on Yocto 1.8, which is based on Linux 3.19.
+  - Note that the git trees for kernel and u-boot are
+    - https://github.com/Xilinx/linux-xlnx
+    - https://github.com/Xilinx/u-boot-xlnx
+
 ## Tutorials
 1. ZedBoard Getting Started Guide  
    http://zedboard.org/sites/default/files/documentations/GS-AES-Z7EV-7Z020-G-V7.pdf
