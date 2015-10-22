@@ -204,6 +204,23 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
     - https://github.com/Xilinx/linux-xlnx
     - https://github.com/Xilinx/u-boot-xlnx
 
+- PetaLinux Workflow
+  - cd <PetaLinux_Project>
+  - petalinux-create -t project -n software --template zynq
+  - cd <Vivado_Export_to_SDK_Directory>
+  - petalinux-config --get-hw-description -p <PetaLinux_Project>/software/
+    - Make sure that "primary sd" is selected in 
+      - Subsystem AUTO Hardware Settings > Advanced bootable images storage Settings > boot image settings > image storage media
+      - Subsystem AUTO Hardware Settings > Advanced bootable images storage Settings > kernel image settings > image storage media
+    - (Optional) petalinux-config -c rootfs
+    - (Optional) petalinux-config -c kernel
+  - petalinux-build
+    - Make necessary changes to device tree settings found in subsystems/linux/configs/device-tree/
+  - cd images/linux
+  - petalinux-package --boot --fsbl zynq_fsbl.elf --fpga system_wrapper.bit --uboot
+    - Copy BOOT.BIN and image.ub to the SD card
+    - Boot the ZedBoard with the SD card (make sure the jumpers are set correctly)
+
 ## Tutorials
 1. ZedBoard Getting Started Guide  
    http://zedboard.org/sites/default/files/documentations/GS-AES-Z7EV-7Z020-G-V7.pdf
@@ -229,7 +246,40 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
    - Embedded System Design Flow on Zynq  
      http://www.xilinx.com/support/university/vivado/vivado-workshops/Vivado-embedded-design-flow-zynq.html
 
-## Known Issues
+## Known Issues (PetaLinux)
 
 - Release Notes and Known Issues for PetaLinux 2013.04 and later (AR# 55776)
   - http://www.xilinx.com/support/answers/55776.html
+
+- Ethernet
+  - Insert the following into subsystems/linux/configs/device-tree/system-top.dts
+
+  ```
+  &gem0 {
+  	phy-handle = <&phy0>;
+  	ps7_ethernet_0_mdio: mdio {
+  		#address-cells = <1>;
+  		#size-cells = <0>;
+  		phy0: phy@0 {
+  			compatible = "marvell,88e1510";
+  			device_type = "ethernet-phy";
+  			reg = <0>;
+  		} ;
+  	} ;
+  };
+  ```
+
+- UIO
+  - Replace `compatible` for each GPIO device in subsystems/linux/configs/device-tree/pl.dtsi
+
+  ```
+  compatible = "generic-uio"
+  ```
+
+  - Replace `bootargs` in subsystems/linux/configs/device-tree/system-conf.dtsi
+
+  ```
+  bootargs = "console=ttyPS0,115200 earlyprintk,uio_pdrv_genirq.of_id=generic-uio";
+  ```
+
+
