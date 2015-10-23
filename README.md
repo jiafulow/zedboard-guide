@@ -245,6 +245,14 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
    http://www.xilinx.com/support/university/workshops.html
    - Embedded System Design Flow on Zynq  
      http://www.xilinx.com/support/university/vivado/vivado-workshops/Vivado-embedded-design-flow-zynq.html
+   - Advanced Embedded System Design on Zynq  
+     http://www.xilinx.com/support/university/vivado/vivado-workshops/Vivado-adv-embedded-design-zynq.html
+   - Embedded Linux on Zynq  
+     http://www.xilinx.com/support/university/vivado/vivado-workshops/Vivado-embedded-linux-zynq.html
+
+1. Zynq-7000 All Programmable SoC: Embedded Design Tutorial (UG1165)  
+   http://www.xilinx.com/support/documentation/sw_manuals/xilinx2015_2/ug1165-zynq-embedded-design-tutorial.pdf
+   - Remember to download the tutorial design files
 
 ## Known Issues (PetaLinux)
 
