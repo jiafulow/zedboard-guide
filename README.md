@@ -179,8 +179,21 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
 
 ## Useful info
 
-- Zynq-7000 Technical Reference Manual (UG585)  
-  http://www.xilinx.com/support/documentation/user_guides/ug585-Zynq-7000-TRM.pdf
+- References
+  - ZedBoard Hardware User's Guide  
+    http://zedboard.org/sites/default/files/documentations/ZedBoard_HW_UG_v2_2.pdf
+  - Zynq-7000 Technical Reference Manual (UG585)  
+    http://www.xilinx.com/support/documentation/user_guides/ug585-Zynq-7000-TRM.pdf
+  - ARM Cortex-A9 Technical Reference Manual  
+    http://infocenter.arm.com/help/topic/com.arm.doc.ddi0388g/DDI0388G_cortex_a9_r3p0_trm.pdf
+
+- Zynq-7000 IP (ZYNQ7 Processing System) in Vivado 2015.2 with ZedBoard preset
+
+<table>
+<tr>
+<td><img src="/images/ZynqIP.png" width="480px" alt="ZYNQ7 Processing System IP"/></td>
+</tr>
+</table>
 
 - Zynq-7000 memory map  
   (from http://www.xilinx.com/support/documentation/data_sheets/ds190-Zynq-7000-Overview.pdf)
