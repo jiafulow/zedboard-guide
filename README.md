@@ -227,6 +227,7 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
       - Subsystem AUTO Hardware Settings > Advanced bootable images storage Settings > kernel image settings > image storage media
     - (Optional) `petalinux-config -c rootfs`
     - (Optional) `petalinux-config -c kernel`
+  - `petalinux-create -t apps -n myapp --template c --enable`
   - `petalinux-build`
     - Make necessary changes to device tree settings found in subsystems/linux/configs/device-tree/
   - `cd images/linux`
