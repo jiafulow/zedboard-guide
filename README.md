@@ -6,11 +6,14 @@
   - Xilinx Zynq-7000 AP SoC XC7Z020-CLG484
   - Dual-core ARM Cortex A9
     - ARMv7-A architecture, r3p0 revision
+    - 667 MHz max clock frequency (speed grade -1)
+    - L1 cache: 32 KB instruction, 32 KB data per processor
+    - L2 cache: 512 KB
+    - 256KB on chip memory (OCM)
   - Memory:
     - 512 MB DDR3 SD RAM
     - 256 Mb Quad-SPI flash memory
     - Static memory controller
-    - 256 KB RAM in the on-chip memory
     - 4 GB SD card
   - Onboard USB-JTAG Programming
   - 10/100/1000 Ethernet
@@ -203,6 +206,16 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
 <td><img src="/images/ZynqMemoryMap.png" width="480px" alt="Zynq-7000 memory map"/></td>
 </tr>
 </table>
+
+- ZedBoard PS-PL interface
+  - 2x 32-bit AXI general-purpose (GP) master interfaces
+  - 2x 32-bit AXI general-purpose (GP) slave interfaces
+  - 4x 64-bit AXI high-performance (HP) slave interfaces
+  - 1x 64-bit AXI Accelerator Coherency Port (ACP) slave interface
+  - 4x PS clock outputs to PL
+  - 4x PS reset outputs to PL
+  - 16x interrupts
+  - DMA, event signals, EMIO, ...
 
 - ZedBoard schematics  
   http://zedboard.org/sites/default/files/documentations/ZedBoard_RevD.2_Schematic_130516.pdf
