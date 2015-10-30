@@ -3,7 +3,7 @@
 ## Overview
 
 - ZedBoard specs (Rev D):
-  - Xilinx Zynq-7000 AP SoC XC7Z020-CLG484
+  - Xilinx Zynq-7000 AP SoC XC7Z020-CLG484-1
   - Dual-core ARM Cortex A9
     - ARMv7-A architecture, r3p0 revision
     - 667 MHz max clock frequency (speed grade -1)
@@ -146,25 +146,63 @@ sudo gtkterm
 - Setup DHCP server
   - Set a network connection profile with
 
-   ```
-   ip address: 192.168.1.1
-   netmask   : 255.255.255.0
-   gateway   : 192.168.1.100
-   ```
+  ```
+  ip address: 192.168.1.1
+  netmask   : 255.255.255.0
+  gateway   : 192.168.1.100
+  ```
 
   - Install DHCP server
 
-   ```
-   sudo apt-get install isc-dhcp-server
-   ```
+  ```
+  sudo apt-get install isc-dhcp-server
+  ```
 
   - Edit /etc/dhcp/dhcpd.conf and /etc/default/isc-dhcp-server according to https://help.ubuntu.com/lts/serverguide/dhcp.html
+    - e.g.
+
+  ```
+  # Edit /etc/dhcp/dhcpd.conf
+  subnet 192.168.1.0 netmask 255.255.255.0 {
+   range 192.168.1.150 192.168.1.200;
+   option routers 192.168.1.254;
+   option domain-name-servers 192.168.1.1, 192.168.1.2;
+   option domain-name "mydomain.example";
+  }
+  ```
+
+  ```
+  # Edit /etc/default/isc-dhcp-server
+  INTERFACES="eth0"
+  ```
 
   - Restart
 
-    ```
-    sudo service isc-dhcp-server restart
-    ```
+  ```
+  sudo service isc-dhcp-server restart
+  ```
+
+- Setup NFS server
+
+  - Install NFS server
+
+  ```
+  sudo apt-get install nfs-kernel-server
+  ```
+
+  - Edit /etc/exports according to https://help.ubuntu.com/community/SettingUpNFSHowTo#Install_NFS_Server
+    - e.g.
+
+  ```
+  # Edit /etc/exports
+  <directory> 192.168.1.*(rw,sync,no_subtree_check)
+  ```
+
+  - Restart
+
+  ```
+  sudo service nfs-kernel-server restart
+  ```
 
 ## Startup
 
@@ -256,6 +294,13 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
     - Copy BOOT.BIN and image.ub to the SD card
     - Boot the ZedBoard with the SD card (make sure the jumpers are set correctly)
 
+- PetaLinux netboot using TFTP
+  - Use SD card for initial boot. Connect the ethernet cable. 
+  - When the message "Hit any key to stop autoboot" shows, stop the autoboot. 
+  - If an IP address was not obtained, run `dhcp`.
+  - Run `set serverip 192.168.1.1`  (TFTP server IP).
+  - Run `run netboot`.
+
 ## Tutorials
 1. ZedBoard Getting Started Guide  
    http://zedboard.org/sites/default/files/documentations/GS-AES-Z7EV-7Z020-G-V7.pdf
@@ -324,5 +369,20 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
   ```
   bootargs = "console=ttyPS0,115200 earlyprintk uio_pdrv_genirq.of_id=generic-uio";
   ```
+
+
+## Miscellaneous (PetaLinux)
+
+- Enable tcf-agent
+  - [rootfs] Filesystem Packages -> base -> tcf-agent
+
+- Enable ssh-server
+  - [rootfs] Filesystem Packages -> console/network -> dropbear
+  - [rootfs] Filesystem Packages -> console/network -> dropbear-openssh-sftp-server
+
+- Mount via NFS
+  - `mkdir /mnt/nfs`
+  - `mount -o port=2049,nolock,proto=tcp -t nfs 192.168.1.1:<directory> /mnt/nfs`
+  - can now execute "myapp" in build/linux/rootfs/apps/myapp/myapp
 
 
