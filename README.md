@@ -271,10 +271,15 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
 
 - PetaLinux Tools
   - See http://www.xilinx.com/tools/petalinux-sdk.htm
-  - Note that PetaLinux v2015.2.1 is based on Yocto 1.8, which is based on Linux 3.19.
-  - Note that the git trees for PetaLinux kernel and u-boot are
+  - Also see http://www.wiki.xilinx.com/PetaLinux
+  - PetaLinux v2015.2.1 is based on Yocto 1.8, which is based on Linux 3.19
+  - PetaLinux includes BusyBox 1.23.1 and Dropbear SSH server
+  - The git trees for PetaLinux kernel and u-boot are
     - https://github.com/Xilinx/linux-xlnx
     - https://github.com/Xilinx/u-boot-xlnx
+  - Xilinx Wiki for Linux tools
+    - http://www.wiki.xilinx.com/Getting+Started
+    - http://www.wiki.xilinx.com/Linux+Drivers
 
 - PetaLinux Workflow
   - `cd <PetaLinux_Project>`
@@ -291,8 +296,9 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
     - Make necessary changes to device tree settings found in subsystems/linux/configs/device-tree/
   - `cd images/linux`
   - `petalinux-package --boot --fsbl zynq_fsbl.elf --fpga system_wrapper.bit --uboot`
-    - Copy BOOT.BIN and image.ub to the SD card
-    - Boot the ZedBoard with the SD card (make sure the jumpers are set correctly)
+    - Copy BOOT.BIN and image.ub (roughly 11 MB) to the SD card.
+      - The SD card has to be formatted as FAT32.
+    - Boot the ZedBoard with the SD card (make sure the jumpers are set correctly).
 
 - PetaLinux netboot using TFTP
   - Use SD card for initial boot. Connect the ethernet cable. 
@@ -334,6 +340,12 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
    http://www.xilinx.com/support/documentation/sw_manuals/xilinx2015_2/ug1165-zynq-embedded-design-tutorial.pdf
    - Remember to download the tutorial design files
 
+1. Zynq Base Targeted Reference Design (TRD) 2015.2  
+   http://www.xilinx.com/support/documentation/boards_and_kits/zc702_zvik/2015_2/ug925-zynq-zc702-base-trd.pdf  
+   http://www.wiki.xilinx.com/Zynq+Base+TRD+2015.2
+   - For ZC702 Evaluation Board, not ZedBoard!
+   - Remember to download the tutorial design files
+
 ## Known Issues (PetaLinux)
 
 - Release Notes and Known Issues for PetaLinux 2013.04 and later (AR# 55776)
@@ -365,6 +377,7 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
   ```
 
   - Replace `bootargs` in subsystems/linux/configs/device-tree/system-conf.dtsi
+    - See https://github.com/Xilinx/linux-xlnx/commit/7ebd62dbc727ef343b07c01c852a15fc4d9cc9e5 for explanation.
 
   ```
   bootargs = "console=ttyPS0,115200 earlyprintk uio_pdrv_genirq.of_id=generic-uio";
