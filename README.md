@@ -343,7 +343,7 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
 1. Zynq Base Targeted Reference Design (TRD) 2015.2  
    http://www.xilinx.com/support/documentation/boards_and_kits/zc702_zvik/2015_2/ug925-zynq-zc702-base-trd.pdf  
    http://www.wiki.xilinx.com/Zynq+Base+TRD+2015.2
-   - For ZC702 Evaluation Board, not ZedBoard!
+   - :warning: For ZC702 Evaluation Board, not ZedBoard!
    - Remember to download the tutorial design files
 
 ## Known Issues (PetaLinux)
