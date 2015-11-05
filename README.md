@@ -275,9 +275,10 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
   - Also see http://www.wiki.xilinx.com/PetaLinux
   - PetaLinux v2015.2.1 is based on Yocto 1.8, which is based on Linux 3.19
   - PetaLinux includes BusyBox 1.23.1 and Dropbear SSH server
-  - The git trees for PetaLinux kernel and u-boot are
+  - The git trees for PetaLinux are
     - https://github.com/Xilinx/linux-xlnx
     - https://github.com/Xilinx/u-boot-xlnx
+    - https://github.com/Xilinx/device-tree-xlnx.git
   - Xilinx Wiki for Linux tools
     - http://www.wiki.xilinx.com/Getting+Started
     - http://www.wiki.xilinx.com/Linux+Drivers
@@ -451,16 +452,48 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
 ## Miscellaneous (PetaLinux)
 
 - Enable TCF agent
-  - [rootfs] Filesystem Packages -> base -> tcf-agent
+
+  ```
+  petalinux-config -c rootfs`
+  # Select Filesystem Packages -> base -> tcf-agent
+  ```
 
 - Enable SSH server
-  - [rootfs] Filesystem Packages -> console/network -> dropbear
-  - [rootfs] Filesystem Packages -> console/network -> dropbear-openssh-sftp-server
+
+  ```
+  petalinux-config -c rootfs`
+  # Select Filesystem Packages -> console/network -> dropbear
+  # Select Filesystem Packages -> console/network -> dropbear-openssh-sftp-server
+  ```
 
 - Mount via NFS
-  - `mkdir /mnt/nfs`
-  - `mount -o port=2049,nolock,proto=tcp -t nfs 192.168.1.1:<directory> /mnt/nfs`
-  - `cd /mnt/nfs/<project>`
-  - can now execute "myapp" in build/linux/rootfs/apps/myapp/myapp
 
+  ```
+  mkdir /mnt/nfs
+  mount -o port=2049,nolock,proto=tcp -t nfs 192.168.1.1:<directory> /mnt/nfs
+  cd /mnt/nfs/<project>
+  # Can now execute "myapp" in build/linux/rootfs/apps/myapp/myapp
+  ```
+
+- Use an external Linux kernel
+
+  ```
+  cd <directory>
+  mkdir linux-kernel
+  git clone git@github.com:Xilinx/linux-xlnx.git
+  git checkout -b from-xilinx-v2015.3 xilinx-v2015.3
+  petalinux-config --searchpath --append <directory>
+  petalinux-config
+  # Select linux Components Selection -> kernel -> linux-xlnx
+  ```
+
+- Update device tree generator
+
+  ```
+  cd /opt/PetaLinux/petalinux-v2015.2.1-final/components/edk_user_repository/device-tree-generator
+  git remote add gh-origin git@github.com:Xilinx/device-tree-xlnx.git
+  git fetch gh-origin
+  git checkout -b from-xilinx-v2015.3 gh-origin/xilinx-v2015.3
+  petalinux-config --get-hw-description=<Vivado_Export_to_SDK_Directory>
+  ```
 
