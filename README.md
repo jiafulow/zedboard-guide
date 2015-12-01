@@ -254,6 +254,16 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
   - (Default) Input frequency: 33.333333 MHz, CPU clock ratio 6:2:1
     - CPU freq: 667 MHz, DDR freq: 533 MHz
 
+- Zynq-7000 APU
+  - Dual-core ARM Cortex-A9 processor
+    - ARMv7 architecture, runs 32-bit ARM instructions, 16-bit and 32-bit Thumb instructions, 8-bit Java byte codes, implements ARM NEON coprocessor technology, a single instruction multiple data (SIMD) architecture
+  - Snoop control unit (SCU)
+  - L2 cache controller
+  - On-chip memory (OCM)
+  - 8-channel DMA
+  - System watchdog timer
+  - Triple-timer controller (TTC)
+
 - Zynq-7000 PS-PL interface
   - 2x 32-bit AXI general-purpose (GP) master interfaces
   - 2x 32-bit AXI general-purpose (GP) slave interfaces
@@ -263,6 +273,9 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
   - 4x PS reset outputs to PL
   - 16x interrupts
   - DMA, event signals, EMIO, ...
+
+- Zynq-7000 interrupts
+  - 64 shared peripheral interrupts (PL interrupts + PS IOP interrupts) are supported, starting from ID 32
 
 - ZedBoard schematics  
   http://zedboard.org/sites/default/files/documentations/ZedBoard_RevD.2_Schematic_130516.pdf
@@ -319,10 +332,12 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
 
 <tr><td>ACP         </td><td>Accelerator Coherency Port                 </td></tr>
 <tr><td>AP SoC      </td><td>All Programmable System on a Chip          </td></tr>
+<tr><td>APB         </td><td>Advanced Peripheral Bus                    </td></tr>
 <tr><td>APU         </td><td>Application Processor Unit                 </td></tr>
 <tr><td>ASIC        </td><td>Application-Specific Integrated Circuit    </td></tr>
 <tr><td>AXI         </td><td>Advanced eXtensible Interface              </td></tr>
 <tr><td>BSP         </td><td>Board Support Package                      </td></tr>
+<tr><td>CLB         </td><td>Configurable Logic Block                   </td></tr>
 <tr><td>DMA         </td><td>Direct Memory Access                       </td></tr>
 <tr><td>DRM         </td><td>Direct Rendering Manager                   </td></tr>
 <tr><td>DSP         </td><td>Digital Signal Processor                   </td></tr>
@@ -345,6 +360,8 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
 <tr><td>IP          </td><td>Intellectual Property                      </td></tr>
 <tr><td>IRQ         </td><td>Interrupt ReQuest                          </td></tr>
 <tr><td>JTAG        </td><td>Joint Test Action Group                    </td></tr>
+<tr><td>LUT         </td><td>Look-Up Tables                             </td></tr>
+<tr><td>LVDS        </td><td>Low Voltage Differential Signal            </td></tr>
 <tr><td>MIO         </td><td>Multiplexed I/O                            </td></tr>
 <tr><td>MMU         </td><td>Memory Management Unit                     </td></tr>
 <tr><td>OCM         </td><td>On-Chip Memory                             </td></tr>
@@ -418,6 +435,7 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
 
 - Ethernet
   - Insert the following into subsystems/linux/configs/device-tree/system-top.dts
+    - See http://www.xilinx.com/support/answers/61117.html
 
   ```
   &gem0 {
