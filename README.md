@@ -204,6 +204,8 @@ sudo gtkterm
   sudo service nfs-kernel-server restart
   ```
 
+  - Note that if you have firewall running, you have to keep the port 2049 open (or disable the firewall).
+
 ## Startup
 
 - Get a license from http://www.xilinx.com/getlicense
@@ -240,8 +242,9 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
 </tr>
 </table>
 
-- Zynq-7000 memory map  
+- Zynq-7000 memory map/address map  
   (from http://www.xilinx.com/support/documentation/data_sheets/ds190-Zynq-7000-Overview.pdf)
+  - Each unique 32-bit address holds one byte.
 
 <table>
 <tr>
@@ -321,6 +324,9 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
   - If an IP address was not obtained, run `dhcp`.
   - Run `set serverip 192.168.1.1`  (TFTP server IP).
   - Run `run netboot`.
+
+- AXI reference guide
+  - http://www.xilinx.com/support/documentation/ip_documentation/axi_ref_guide/latest/ug1037-vivado-axi-reference-guide.pdf
 
 - Acronyms
 
