@@ -17,7 +17,7 @@
   - PetaLinux build area:  
     `/home/jlow/Work/PetaLinux/testbeam_4a`
 
-### Commands
+### Build
 
 1. Create the project in the build area.
   
@@ -74,7 +74,9 @@
   cd -
   ```
 
-1. Now copy `BOOT.BIN` and `image.ub` from the `images/linux/` subdirectory into the SD card. 
+1. Finally, copy `BOOT.BIN` and `image.ub` from the `images/linux/` subdirectory into the SD card. 
+
+### Run
 
 1. Use the SD card to boot the ZedBoard. When prompted for username and password, enter "root" for both. 
   - Execute the application by running `linux_skiroc_sc_test`.
