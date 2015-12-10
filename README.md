@@ -499,6 +499,21 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
   # Can now execute "myapp" in build/linux/rootfs/apps/myapp/myapp
   ```
 
+- Change MAC address
+
+  ```
+  petalinux-config
+  # Select Subsystem AUTO Hardware Settings -> Ethernet Settings -> (00:0a:35:00:1e:53) Ethernet MAC address 
+  ```
+
+- Use static IP address
+
+  ```
+  petalinux-config
+  # Deselect Subsystem AUTO Hardware Settings -> Ethernet Settings -> Obtain IP address automatically
+  # After that, three new configurations (Static IP address, netmask, gateway) appear. Select and update them
+  ```
+
 - Use an external Linux kernel
 
   ```
