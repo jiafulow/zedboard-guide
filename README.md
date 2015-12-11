@@ -514,6 +514,55 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
   # After that, three new configurations (Static IP address, netmask, gateway) appear. Select and update them
   ```
 
+- Run applications at startup
+
+  - See [AR# 55998](http://www.xilinx.com/support/answers/55998.html)
+  - Create an application, and create a startup script in the application area
+
+  ```
+  petalinux-create -t apps -n mystartup --enable
+  echo 'echo "Hello World"' > components/apps/mystartup/mystartup.sh
+  ```
+
+  - Modify the Makefile, remove any reference to `APP_OBJS` and `*.o`, update the `install` section to copy `mystartup` to `/etc/init.d/` and create a symbolic link to `/etc/rc5.d/`
+
+  ```
+  # Modify components/apps/mystartup/Makefile "install" section
+  
+  install: $(APP)
+  	$(TARGETINST) -d -p 0755 mystartup /etc/init.d/mystartup
+  	$(TARGETINST) -s /etc/init.d/mystartup /etc/rc5.d/S99mystartup
+  ```
+
+    - Remember to indent with a tab character, otherwise the Makefile won't work
+
+- Auto login 
+
+  - Add a new file `build/linux/rootfs/targetroot/bin/autologin` with the following content:
+
+  ```
+  #!/bin/sh
+  exec /bin/login -f root
+  ```
+
+  - Make `autologin` executable
+  
+  ```
+  chmod 755 build/linux/rootfs/targetroot/bin/autologin
+  ```
+
+  - Modify `build/linux/rootfs/targetroot/etc/inittab`, change the very last line to
+
+  ```
+  PS0:2345:respawn:/sbin/getty -l /bin/autologin -n -L 115200 ttyPS0 vt100
+  ```
+
+  - Repackage the image
+
+  ```
+  petalinux-package --image
+  ```
+
 - Use an external Linux kernel
 
   ```

@@ -54,14 +54,19 @@
   <img src="images/mac_and_ip_5.png" width="450px"/><br/>
   <img src="images/mac_and_ip_6.png" width="450px"/>
 
-  - Exit from the entire menu, save the config when asked. To reconfigure Linux at a later time, call `petalinux-config`. Note that these can be done by manually editing the file `subsystems/linux/config`.  
-  - (Optional) Configure kernel and rootfs settings by calling `petalinux-config -c kernel` and `petalinux-config -c rootfs`, respectively. Note that these can be done by manually editing the files `subsystems/linux/configs/kernel/config` and `subsystems/linux/configs/rootfs/config`, respectively.  
+  - Exit from the entire menu, save the config when asked. To reconfigure Linux at a later time, call `petalinux-config`. Note that these can also be done by manually editing the file `subsystems/linux/config`.  
+  - (Optional) Configure kernel and root filesystem settings by calling `petalinux-config -c kernel` and `petalinux-config -c rootfs`, respectively. Note that these can also be done by manually editing the files `subsystems/linux/configs/kernel/config` and `subsystems/linux/configs/rootfs/config`, respectively.  
 
-1. Create the application (and enable it), then build the Linux OS. This will take a while for the first time.
+1. Create the user application (and enable it). Create yet another application that runs automatically at system startup. Update the device tree. Then, build the Linux OS. This will take a while for the first time.
 
   ```
   petalinux-create -t apps -n linux_skiroc_sc_test --template c --enable
-  cp /home/jlow/Work/test_beam_DAQ_2015/projects/testbeam_4a/software/linux_skiroc_sc_test.c components/apps/linux_skiroc_sc_test/
+  cp /home/jlow/Work/test_beam_DAQ_2015/projects/testbeam_4a/software/linux_skiroc_sc_test/* components/apps/linux_skiroc_sc_test/
+
+  petalinux-create -t apps -n mystartup --template c --enable
+  rm components/apps/mystartup/* build/linux/rootfs/apps/mystartup/*
+  cp /home/jlow/Work/test_beam_DAQ_2015/projects/testbeam_4a/software/mystartup/* components/apps/mystartup/
+
   cp /home/jlow/Work/test_beam_DAQ_2015/projects/testbeam_4a/software/system-top.dts subsystems/linux/configs/device-tree/
   petalinux-build
   ```
