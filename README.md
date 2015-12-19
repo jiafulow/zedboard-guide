@@ -290,11 +290,11 @@ source /opt/PetaLinux/petalinux-v2015.2.1-final/settings.sh
   - See http://www.xilinx.com/tools/petalinux-sdk.htm
   - Also see http://www.wiki.xilinx.com/PetaLinux
   - PetaLinux v2015.2.1 is based on Yocto 1.8, which is based on Linux 3.19
-  - PetaLinux includes BusyBox 1.23.1 and Dropbear SSH server
-  - The git trees for PetaLinux are
-    - https://github.com/Xilinx/linux-xlnx
-    - https://github.com/Xilinx/u-boot-xlnx
-    - https://github.com/Xilinx/device-tree-xlnx.git
+  - PetaLinux v2015.2.1 includes BusyBox 1.23.1 and Dropbear SSH server
+  - The git trees for PetaLinux v2015.2.1 are
+    - https://github.com/Xilinx/linux-xlnx  (tag: xilinx-v2015.2.03)
+    - https://github.com/Xilinx/u-boot-xlnx  (tag: xilinx-v2015.2)
+    - https://github.com/Xilinx/device-tree-xlnx.git  (tag: xilinx-v2015.2.02)
   - Xilinx Wiki for Linux tools
     - http://www.wiki.xilinx.com/Getting+Started
     - http://www.wiki.xilinx.com/Linux+Drivers
