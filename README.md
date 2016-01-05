@@ -4,6 +4,9 @@
 
 - ZedBoard specs (Rev D):
   - Xilinx Zynq-7000 AP SoC XC7Z020-CLG484-1
+  - Programmable logic:
+    - Derived from Xilinx Artix-7 FPGA
+    - Includes configurable logic blocks (CLBs), port and width configurable block RAM (BRAM), DSP slices with a 25 x 18 multiplier, 48-bit accumulator and pre-adder (DSP48E1), a user configurable analog to digital convertor (XADC), clock management tiles (CMT), etc
   - Dual-core ARM Cortex A9
     - ARMv7-A architecture, r3p0 revision
     - 667 MHz max clock frequency (speed grade -1)
