@@ -2,8 +2,9 @@
 
 ## Introduction
 
-This page documents the software that access SKIROC2 slow control (SC) register.
-In the context of PetaLinux, the 'server' is the Linux OS itself; and functions that read/write registers are built as different programs. The software currently consists of these programs:
+This page documents the software used to access the SKIROC2 slow control (SC) register.
+In the context of PetaLinux, the 'server' is the Linux OS itself; and the functions that read/write registers are built as different executable programs.
+The software currently consists of these programs:
 
 - `sk2_sc_peek`
   - Read the value of a given register.
@@ -12,18 +13,18 @@ In the context of PetaLinux, the 'server' is the Linux OS itself; and functions 
 - `sk2_sc_reset`
   - Reset all the registers to their default values.
 - `sk2_sc_scan`
-  - Read the values of all the registers
+  - Read the values of all the registers in sequence.
 - `sk2_sc_bitbang`
   - Output the values of all the registers serially by doing software bit-banging.
 - `sk2_sc_bitbang_ipbus`
-  - Output the values of all the registers serially by doing software bit-banging, using a simplified IPbus protocol
+  - Output the values of all the registers serially by doing software bit-banging, using a simplified IPbus protocol.
 
 The software design is explained in section [Software Design](#software-design). The program usage is described in section [Program Usage](#program-usage).
 
 ### Software Design
 
-The software has been uploaded to GitHub [test_beam_DAQ_2015](https://github.com/jbueghly/test_beam_DAQ_2015/) repository.
-It can be found in the directory [projects/testbeam_5b/software/sk2_sc_peekpoke](https://github.com/jbueghly/test_beam_DAQ_2015/tree/master/projects/testbeam_5b/software/sk2_sc_peekpoke).
+The software has been uploaded to [test_beam_DAQ_2015](https://github.com/jbueghly/test_beam_DAQ_2015/) GitHub repository.
+The software can be found in the directory [projects/testbeam_5b/software/sk2_sc_peekpoke](https://github.com/jbueghly/test_beam_DAQ_2015/tree/master/projects/testbeam_5b/software/sk2_sc_peekpoke).
 
 The names and other properties of the registers in SKIROC2 SC are hard-coded in the python script `define_SKIROC2_SC.py` like the following:
 
@@ -39,8 +40,8 @@ skiroc2_slow_control_register = [
 ]
 ```
 
-The python script `generate_SKIROC2_SC.py` then generates a C header file `SKIROC2_SC_hw.h`, with a lookup table like the following. 
-Note that the lookup table entries are sorted by the register name to allow binary search which reduces lookup time.
+The python script `generate_SKIROC2_SC.py`, when called, generates a C header file `SKIROC2_SC_hw.h`, with a lookup table like the following. 
+Note that the lookup table entries are sorted by the register name to allow binary search and reduce lookup time.
 
 ```python
 static const item_t lookup_table[LOOKUP_TABLE_SIZE+1] = {  // plus one NULL entry
@@ -77,7 +78,7 @@ void skiroc2_slow_control_set_default();
 void skiroc2_slow_control_init();  // from control_register_file
 ```
 
-A much simplified subset of IPbus protocol is declared in `IPbus_simplified.h` and implemented in `IPbus_simplified.c`: 
+A much simplified subset of IPbus protocol is declared in `IPbus_simplified.h` and implemented in `IPbus_simplified.c`. The protocol specifies a packet header format like the following:
 
 ```c
 // Transport Layer protocol - loosely based on the IPBus protocol
@@ -96,6 +97,7 @@ A much simplified subset of IPbus protocol is declared in `IPbus_simplified.h` a
 //                     0x1 - write
 // - Info code       : 0x0 - response
 //                     0xF - request
+```
 
 The software currently only supports one main transaction (write):
 
@@ -110,10 +112,9 @@ unsigned int create_ipbus_write_txn_data(unsigned int data_word);
 
 The executable programs are defined in `sk2_sc_peek.c`, `sk2_sc_poke.c`, `sk2_sc_reset.c`, `sk2_sc_scan.c`, `sk2_sc_bitbang`, `sk2_sc_bitbang_ipbus`. 
 See the section [Program Usage](#program-usage) for usage detail. 
-They can be built in PetaLinux environment by using `petalinux-build`. They can also be built on any gcc-compatible Linux OS by using `make` with the makefile `Makefile-gcc`.
-Currently, the software does not use anything from the PL.
+They can be built in the PetaLinux environment by using `petalinux-build` with the default makefile `Makefile`. They can also be built on any gcc-compatible Linux OS by using `make` with the makefile `Makefile-gcc`.
 
-`sk2_sc_reset` must be called at least once to initialize all the registers to their default values. The program creates a plain text file `sk2_sc_cur_state` that records the current 'state' of the registers (those 616 bits). Without the file `sk2_sc_cur_state`, other programs will fail.
+`sk2_sc_reset` must be called at least once to initialize all the registers to their default values. The program creates a plain-text file `sk2_sc_cur_state` that records the current 'state' of the SKIROC2 SC register (all those 616 bits). Without the file `sk2_sc_cur_state`, other programs will fail.
 
 
 ### Program Usage
