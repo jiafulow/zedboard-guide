@@ -78,7 +78,7 @@ void skiroc2_slow_control_set_default();
 void skiroc2_slow_control_init();  // from control_register_file
 ```
 
-A much simplified subset of IPbus protocol is declared in `IPbus_simplified.h` and implemented in `IPbus_simplified.c`. The protocol specifies a packet header format like the following:
+A simplified subset of IPbus protocol is declared in `IPbus_simplified.h` and implemented in `IPbus_simplified.c`. The protocol specifies a packet header format like the following:
 
 ```c
 // Transport Layer protocol - loosely based on the IPBus protocol
@@ -98,6 +98,8 @@ A much simplified subset of IPbus protocol is declared in `IPbus_simplified.h` a
 // - Info code       : 0x0 - response
 //                     0xF - request
 ```
+
+> :warning: <span style="color: #F00">The IPbus implementation has been updated in [projects/testbeam_6a/software/sk2_sc_transport](https://github.com/jbueghly/test_beam_DAQ_2015/tree/master/projects/testbeam_6a/software/sk2_sc_transport). See page [Transport Layer](transport-layer.md) for its documentation. </span>
 
 The software currently only supports one main transaction (write):
 
