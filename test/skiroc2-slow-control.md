@@ -123,7 +123,7 @@ They can be built in the PetaLinux environment by using `petalinux-build` with t
 
 - `sk2_sc_peek`
 
-```shell
+```
 # Usage: sk2_sc_peek REGISTER
 
 $ sk2_sc_peek EN_PA
@@ -134,7 +134,7 @@ PP_PA 0b0
 
 - `sk2_sc_poke`
 
-```shell
+```
 # Usage: sk2_sc_poke REGISTER VALUE
 
 $ sk2_sc_peek EN_PA

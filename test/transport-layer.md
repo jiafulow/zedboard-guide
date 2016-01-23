@@ -144,7 +144,7 @@ Basically, `Command` is the transaction before it is packed; while `Transaction`
 
 - `sk2_sc_ipbus_write_txn`
 
-```shell
+```
 usage: sk2_sc_write_txn N [WORD 1, ..., WORD N]
 
        N is in decimal, WORD is in HEX, e.g.
@@ -183,7 +183,7 @@ Dump txn:
 
 - `sk2_sc_ipbus_read_txn`
 
-```shell
+```
 usage: sk2_sc_read_txn N
 
        N is in decimal, e.g.
