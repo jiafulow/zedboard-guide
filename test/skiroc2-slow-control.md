@@ -270,5 +270,7 @@ IPbus Packet Data 211: 0x0000000E
 ## References
 
 - SKIROC2: http://omega.in2p3.fr/index.php/products/skiroc.html
+  - SKIROC2 specifications: http://omega.in2p3.fr/index.php/download-center/doc_download/248-skiroc2chip.html
+  - SKIROC 2 user guide: http://omega.in2p3.fr/index.php/download-center/doc_download/556-skiroc2userguide.html
 - IPbus: https://svnweb.cern.ch/trac/cactus/wiki/IPbusFirmware
 
